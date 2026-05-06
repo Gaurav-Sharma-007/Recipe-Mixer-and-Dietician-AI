@@ -10,8 +10,11 @@ class RecipeRequest(BaseModel):
 class RecipeResponse(BaseModel):
     id: int
     name: str
-    description: Optional[str] = None
-    user_id: Optional[int] = None
+    #description: Optional[str] = None
+    #user_id: Optional[int] = None
 
     class Config:
         from_attributes = True
+
+class RecipeRemixRequest(BaseModel):
+    recipe_id: int
