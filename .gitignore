@@ -50,3 +50,6 @@ Thumbs.db
 
 # Accidental local folder created inside this workspace
 /~/
+
+# PostgreSQL persistent data (bind mount)
+pgdata/

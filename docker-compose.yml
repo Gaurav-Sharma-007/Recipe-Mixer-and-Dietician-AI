@@ -10,9 +10,9 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user1"]
+      test: [ "CMD-SHELL", "pg_isready -U user1" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -26,6 +26,7 @@ services:
       - .env
     environment:
       DATABASE_URL: postgresql://user1:123456@db:5432/recipe_db
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     depends_on:
       db:
         condition: service_healthy
@@ -33,7 +34,5 @@ services:
     develop:
       watch:
         - path: ./app
+          target: /app/app
           action: sync
-
-volumes:
-  postgres_data:
